@@ -11,14 +11,16 @@
     let continentsData = {};
     let citiesOfSelectedContinent = [];
     let citySelectPlaceholder = "Please select a continent";
-      
-  function loadingState(){
+    
+    function loadingState(){
         isLoading = true;
-    }
+     }
 
     function updateCityandContinent(){
         city = tempCity;
         continent = tempContinent;
+        tempCity = undefined;
+        tempContinent = undefined;
     }
     
     function updateHeader(){
@@ -110,18 +112,20 @@
       <option value={continent}>{continent}</option>
     {/each}
   </select>
+  
   <label for="citySelect">Select a City:</label>
-  <select id="citySelect" bind:value={tempCity} disabled={!continent}>
+  <select id="citySelect" bind:value={tempCity} disabled={!tempContinent}>
     <option value="" disabled>{citySelectPlaceholder}</option>
     {#each citiesOfSelectedContinent as city}
       <option value={city}>{city.replace(/_/g, " ")}</option>
     {/each}
   </select>
+  
   <button
-  on:click={loadingState}
+          on:click={loadingState}
             on:click={updateCityandContinent} 
              on:click={fetchCurrentTime} 
               on:click={updateHeader} 
-              
+              disabled={!tempCity}
   >Submit</button>
   
