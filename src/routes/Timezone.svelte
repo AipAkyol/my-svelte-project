@@ -92,7 +92,7 @@
   </script>
 
 <main>
-    <h1>{header}</h1>
+    <h1>{header.replace(/_/g, " ")}</h1>
     {#if isLoading}
       <p>Loading...</p>
     {:else}
@@ -114,7 +114,7 @@
   <select id="citySelect" bind:value={tempCity} disabled={!continent}>
     <option value="" disabled>{citySelectPlaceholder}</option>
     {#each citiesOfSelectedContinent as city}
-      <option value={city}>{city}</option>
+      <option value={city}>{city.replace(/_/g, " ")}</option>
     {/each}
   </select>
   <button
