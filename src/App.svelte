@@ -1,5 +1,13 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import ConstantClock from "./routes/ConstantClock.svelte"
+ 
+  let constantCitiesAndContinents = [
+    ["America" , "New_York"],
+    ["Europe" , "London"],
+    ["Asia","Tokyo"],
+    ["Australia","Sydney"]
+  ]
 
   let continent;
   let city;
@@ -92,7 +100,17 @@
 </script>
 
 <main>
-  <h1>{header.replace(/_/g, " ")}</h1>
+  <h1 style="margin-top: -80px;">World Clocks</h1>
+  <div class="clock-container">
+    {#each constantCitiesAndContinents as info}
+      <ConstantClock
+        constantContinent={info[0]}
+        constantCity={info[1]}
+      />
+    {/each}
+  </div>
+  
+  <h2>{header.replace(/_/g, " ")}</h2>
   {#if isLoading}
     <p>Loading...</p>
   {:else}
